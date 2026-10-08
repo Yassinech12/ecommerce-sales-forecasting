@@ -2,9 +2,10 @@
 
 > Forecasting the daily revenue of an online retailer (UCI Online Retail II, 1M+ transactions, 2009–2011) with machine learning, and serving the forecasts in an interactive Streamlit app.
 
-🚧 **Work in progress**: data cleaning, EDA and forecasting models are done. The Streamlit app is coming next.
+**Highlights:** 1M+ transactions cleaned · 4 models compared on the Christmas season · **XGBoost cuts the daily error by 20%** vs a seasonal baseline (weekly error ~15%) · interactive **Streamlit app** with backtest, forecasts and CSV export.
 
-![Forecast vs actual](reports/figures/forecast_weekly.png)
+![Streamlit app](docs/images/app_backtest.png)
+
 
 ## ✅ Step 1 – Data cleaning & EDA
 
@@ -45,6 +46,22 @@ Notebook: [`notebooks/02_forecasting.ipynb`](notebooks/02_forecasting.ipynb) · 
 
 ![Daily forecast](reports/figures/forecast_daily.png)
 
+## ✅ Step 3 – Streamlit app
+
+Code: [`app/app.py`](app/app.py)
+
+| Tab | What it shows |
+|---|---|
+| 📊 **Overview** | KPIs (revenue, orders, average order value, growth vs previous 12 months), monthly revenue, weekday pattern, trend |
+| 🎯 **Model performance** | Backtest on the Christmas season for the selected market and model, metrics vs baseline, weekly / daily actual vs forecast |
+| 🔮 **Forecast** | Model retrained on all data, forecast of the next 7–90 days, weekly totals, **CSV download** |
+
+Filters: market (all countries, UK, Ireland, Netherlands, Germany, France), model (XGBoost, Random Forest, Ridge), forecast horizon.
+
+| Overview | Forecast |
+|---|---|
+| ![Overview](docs/images/app_overview.png) | ![Forecast](docs/images/app_forecast.png) |
+
 ## ▶️ Run it
 
 ```bash
@@ -52,12 +69,15 @@ pip install -r requirements.txt
 python src/download_data.py      # downloads the raw data (45 MB) into data/raw/
 python src/data_prep.py          # cleans the data and builds data/processed/daily_sales.csv
 jupyter notebook notebooks/      # 01_eda.ipynb, then 02_forecasting.ipynb
+streamlit run app/app.py         # the app only needs data/processed/ (already in the repo)
 ```
 
 ## 📁 Structure
 
 ```
-├── data/processed/     # Clean daily sales (raw data is downloaded, not versioned)
+├── app/                # Streamlit app
+├── data/processed/     # Clean daily sales, total and by country (raw data is downloaded, not versioned)
+├── docs/images/        # App screenshots
 ├── notebooks/          # 01_eda.ipynb, 02_forecasting.ipynb
 ├── reports/            # Figures and data quality report
 └── src/                # Data download, cleaning, forecasting and plotting code

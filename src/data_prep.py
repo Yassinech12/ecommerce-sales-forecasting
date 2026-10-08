@@ -118,10 +118,26 @@ def daily_sales(df: pd.DataFrame, country: str | None = None) -> pd.DataFrame:
     return daily.reset_index()
 
 
+APP_COUNTRIES = ["United Kingdom", "EIRE", "Netherlands", "Germany", "France"]
+
+
+def daily_sales_by_country(df: pd.DataFrame, countries=APP_COUNTRIES) -> pd.DataFrame:
+    """Daily sales for the whole business ("All countries") and the main markets,
+    on the same continuous calendar."""
+    calendar = pd.date_range(df["Date"].min(), df["Date"].max(), freq="D")
+    frames = []
+    for c in [None, *countries]:
+        d = daily_sales(df, c).set_index("date").reindex(calendar, fill_value=0)
+        d.index.name = "date"
+        frames.append(d.reset_index().assign(country=c or "All countries"))
+    return pd.concat(frames, ignore_index=True)
+
+
 if __name__ == "__main__":
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     raw = load_raw()
     sales, quality = clean(raw)
     print(quality.to_string(index=False))
     daily_sales(sales).to_csv(PROCESSED_DIR / "daily_sales.csv", index=False)
-    print("Saved", PROCESSED_DIR / "daily_sales.csv")
+    daily_sales_by_country(sales).to_csv(PROCESSED_DIR / "daily_sales_by_country.csv", index=False)
+    print("Saved daily_sales.csv and daily_sales_by_country.csv in", PROCESSED_DIR)
