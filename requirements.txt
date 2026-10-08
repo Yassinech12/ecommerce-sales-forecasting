@@ -1,0 +1,11 @@
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.7
+openpyxl>=3.1
+pyarrow>=14
+scikit-learn>=1.4
+xgboost>=2.0
+holidays>=0.50
+streamlit>=1.35
+plotly>=5.0
+jupyter

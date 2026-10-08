@@ -1,0 +1,8 @@
+step,rows_removed,rows_left,share_of_raw_%
+Raw data,0,1067371,0.0
+Exact duplicates,34335,1033036,3.22
+Cancellation lines (invoice 'C...'),19104,1013932,1.79
+Purchases matched by a later cancellation,7067,1006865,0.66
+Bad-debt adjustments (invoice 'A...'),6,1006859,0.0
+"Non-product lines (postage, fees, discounts, vouchers...)",4409,1002450,0.41
+Quantity <= 0 or price <= 0,5962,996488,0.56
