@@ -2,6 +2,10 @@
 
 > Forecasting the daily revenue of an online retailer (UCI Online Retail II, 1M+ transactions, 2009–2011) with machine learning, and serving the forecasts in an interactive Streamlit app.
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ecommerce-sales-forecasting-yc.streamlit.app/)
+
+**👉 Live demo: [ecommerce-sales-forecasting-yc.streamlit.app](https://ecommerce-sales-forecasting-yc.streamlit.app/)**
+
 **Highlights:** 1M+ transactions cleaned · 4 models compared on the Christmas season · **XGBoost cuts the daily error by 20%** vs a seasonal baseline (weekly error ~15%) · interactive **Streamlit app** with backtest, forecasts and CSV export.
 
 ![Streamlit app](docs/images/app_backtest.png)
